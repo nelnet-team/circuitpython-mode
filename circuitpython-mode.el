@@ -6,8 +6,9 @@
 ;; URL: https://github.com/nelnet-team/circuitpython-mode
 
 ;;; Commentary:
-;; #circuitpython-mode.el
-;; This package provides a minor mode called circuitpython-mode
+;; # circuitpython-mode.el
+;; ## This is in early development and almost certainly won't work
+;; This package provides a minor mode called `circuitpython-mode`.
 ;; This mode is intended to help with the workflow in circuitpython
 ;; development. It is invoked by typing:
 ;; ```
@@ -25,11 +26,11 @@
 ;; ```
 ;; cp filename.py /some/path/some/where/
 ;; ```
-
+;;
 ;; Additionally, a new command, `circuitpython-mpy-compile`, is added and
 ;; bound to **[C-c m]**.  If the variable `mpy-compiler` is defined (ie as
 ;; file-local or dir-local), then that command will be used.  Otherwise
-;; the command "cross-mpy" is used.  One potentional reason to specify
+;; the command "mpy-cross" is used.  One potentional reason to specify
 ;; the mpy-compiler is if it is not in $PATH. This will define the
 ;; default compile-command to be something like:
 ;; ```
