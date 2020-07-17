@@ -66,7 +66,7 @@ cp somefile.py /mnt/foo/bar/CIRCPY/"
 	  " "
 	  circuitpython-copy-path)))
 
-(defun get-mpy-compiler ()
+(defun circuitpython-get-mpy-compiler ()
   "Return value for the mpy compiler.
 If the variable is already defined (maybe file-local
 or dir-local) then return that value.
@@ -84,7 +84,7 @@ mpy-cross filename.py
 It assumed this will be bound to something C-c m"
     (set (make-variable-buffer-local 'compile-command)
          (concat
-	  (get-mpy-compiler)
+	  (circuitpython-get-mpy-compiler)
 	  " "
 	  (file-name-nondirectory (buffer-file-name (current-buffer)))))
     (compile)
