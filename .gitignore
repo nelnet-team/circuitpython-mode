@@ -12,3 +12,4 @@ tramp
 .cask
 *.~undo-tree
 .dir-locals.el
+.html
