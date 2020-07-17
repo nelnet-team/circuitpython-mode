@@ -21,10 +21,10 @@
 
 ;; ### Compile (copy file to board)
 
-;; When invoked, each time the buffer is saved (after-save-hook), the new
-;; command `circuitpython-compile-copy' will set the compile-command (which
-;; is usually bound to **[C-c c]**) is updated to be a shell command that
-;; will copy the current file to a different directory (ie the board).  The
+;; A function, `circuitpython-compile-copy', is added that is invoked each
+;; time the buffer is saved (after-save-hook). When invoked, the new
+;; command will update the compile-command to be a shell command that will
+;; copy the current file to a different directory (ie the board).  The
 ;; destination directory needs to be defined as a *file-local* or
 ;; *dir-local* variable.  After each file save (**[C-x C-s]**, **[C-x w]**,
 ;; etc), the default compile-command will be something like:
@@ -33,6 +33,10 @@
 ;; │ cp filename.py /some/path/some/where/
 ;; └────
 
+;; This does not modify the behavior of `compile' itself, it only changes
+;; the command that will presented as the default compile command when
+;; invoking `compile' (usually **[C-c c]** )
+
 ;; ### Compile .mpy
 
 ;; Additionally, a new command, `circuitpython-mpy-compile', is added and
@@ -40,17 +44,10 @@
 ;; file-local or dir-local), then that command will be used.  Otherwise the
 ;; command "mpy-cross" is used.  One potentional reason to specify the
 ;; mpy-compiler is if it is not in $PATH. This will define the
-
-;; When invoked, each time the buffer is saved (after-save-hook), the new
-;; command `circuitpython-compile-copy' will set the compile-command (which
-;; is usually bound to **[C-c c]**) is updated to be a shell command that
-;; will copy the current file to a different directory (ie the board).  The
-;; destination directory needs to be defined as a *file-local* or
-;; *dir-local* variable.  After each file save (**[C-x C-s]**, **[C-x w]**,
-;; etc), the default compile-command will be something like:
+;; compile-command to be something like:
 
 ;; ┌────
-;; │ cp filename.py /some/path/some/where/
+;; │ mpy-cross filename.py
 ;; └────
 
 ;; After this is defined, `compile' is called, after which
