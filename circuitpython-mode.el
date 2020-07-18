@@ -27,7 +27,7 @@
 ;; copy the current file to a different directory (ie the board).  The
 ;; destination directory needs to be defined as a *file-local* or
 ;; *dir-local* variable.  After each file save (**[C-x C-s]**, **[C-x w]**,
-;; etc), the default compile-command will be something like:
+;; 					       etc), the default compile-command will be something like:
 
 ;; ┌────
 ;; │ cp filename.py /some/path/some/where/
@@ -41,7 +41,7 @@
 
 ;; Additionally, a new command, `circuitpython-mpy-compile', is added and
 ;; bound to **[C-c m]**.  If the variable `mpy-compiler' is defined (ie as
-;; file-local or dir-local), then that command will be used.  Otherwise the
+;; 								     file-local or dir-local), then that command will be used.  Otherwise the
 ;; command "mpy-cross" is used.  One potentional reason to specify the
 ;; mpy-compiler is if it is not in $PATH. This will define the
 ;; compile-command to be something like:
@@ -50,10 +50,20 @@
 ;; │ mpy-cross filename.py
 ;; └────
 
-;; After this is defined, `compile' is called, after which
-;; `circuitpython-compile-copy' (see above) is called. This means that
-;; after compiling an .mpy, the compile command will revert back to being
-;; the command to copy the file to the board.
+;; There is also a command, `circuitpython-set-mpy-compiler', bound to
+;; **[C-c n]** that allows the user to override the process described above
+;; and provide an alternative command.
+
+;; After the mpy compile command is defined, `compile' is called, after
+;; which `circuitpython-compile-copy' (see above) is called. This means
+;; that after compiling an .mpy, the compile command will revert back to
+;; being the command to copy the file to the board.
+
+;; ## Example directory local variables `.dir-locals.el'
+
+;; ┌────
+;; │ ((nil . ((circuitpython-copy-path . "/mnt/chromeos/removable/CIRCPY/"))))
+;; └────
 
 (setq circuitpython-current-mpy-compiler "mpy-cross")
 

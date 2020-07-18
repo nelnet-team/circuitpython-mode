@@ -47,7 +47,11 @@ compile-command to be something like:
 mpy-cross filename.py
 #+END_SRC
 
-After this is defined, =compile= is called, after which
+There is also a command, =circuitpython-set-mpy-compiler=, bound to
+**[C-c n]** that allows the user to override the process described
+above and provide an alternative command.
+
+After the mpy compile command  is defined, =compile= is called, after which
 =circuitpython-compile-copy= (see above) is called. This means that
 after compiling an .mpy, the compile command will revert back to being
 the command to copy the file to the board.
