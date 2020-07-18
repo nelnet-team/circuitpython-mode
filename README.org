@@ -52,4 +52,9 @@ After this is defined, =compile= is called, after which
 after compiling an .mpy, the compile command will revert back to being
 the command to copy the file to the board.
 
+## Example directory local variables
+=.dir-locals.el=
 
+#+BEGIN_SRC emacs-lisp
+((nil . ((circuitpython-copy-path . "/mnt/chromeos/removable/CIRCPY/"))))
+#+END_SRC

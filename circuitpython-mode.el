@@ -55,6 +55,8 @@
 ;; after compiling an .mpy, the compile command will revert back to being
 ;; the command to copy the file to the board.
 
+(setq circuitpython-current-mpy-compiler "mpy-cross")
+
 (defun circuitpython-compile-copy ()
   "Set up compile-command to copy script to board.
 This should set compile-command to something like:
@@ -66,14 +68,26 @@ cp somefile.py /mnt/foo/bar/CIRCPY/"
 	  " "
 	  circuitpython-copy-path)))
 
+(defun circuitpython-set-mpy-compiler (newcommand)
+  "Allow the user to interactively set the mpy compiler.  This will provide
+the existing value of circuitpython-current-mpy-compiler as a suggestion."
+  (interactive (list
+		(read-string
+		 (format "New mpy compile command (%s): "
+			 (symbol-value 'circuitpython-current-mpy-compiler))
+		 nil nil
+		 (symbol-value 'circuitpython-current-mpy-compiler))))
+  (setq circuitpython-current-mpy-compiler newcommand)
+  (message "mpy compile command set to %s" circuitpython-current-mpy-compiler))
+
 (defun circuitpython-get-mpy-compiler ()
   "Return value for the mpy compiler.
 If the variable is already defined (maybe file-local
 or dir-local) then return that value.
 Otherwise, return the value 'mpy-cross'"
   (if (boundp 'mpy-compiler)
-      mpy-compiler
-    ("mpy-cross")))
+      (symbol-value 'mpy-compiler)
+    (symbol-value 'circuitpython-current-mpy-compiler)))
 
 (defun circuitpython-mpy-compile ()
   "Alternate compile for circuitpython. Sets compile-command
@@ -82,12 +96,13 @@ circuitpython-compile-copy to restore the original form.
 This should set compile-command to be something like:
 mpy-cross filename.py
 It assumed this will be bound to something C-c m"
+  (interactive)
     (set (make-variable-buffer-local 'compile-command)
          (concat
 	  (circuitpython-get-mpy-compiler)
 	  " "
 	  (file-name-nondirectory (buffer-file-name (current-buffer)))))
-    (compile)
+    (compile compile-command)
     (circuitpython-compile-copy))
 
 ;;;###autoload
@@ -96,6 +111,7 @@ It assumed this will be bound to something C-c m"
   :lighter " circpy"
   :keymap (let ((map (make-sparse-keymap)))
             (define-key map (kbd "C-c m") 'circuitpython-mpy-compile)
+            (define-key map (kbd "C-c n") 'circuitpython-set-mpy-compiler)
             map))
 
 
