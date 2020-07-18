@@ -1,7 +1,7 @@
 ;;; circuitpython-mode.el --- Minor mode for CircuitPython
 
 ;; Author: Lee Nelson <lnelson@nelnet.org>
-;; Version: 0.3
+;; Version: 0.5
 ;; Keywords: circuitpython, adafruit
 ;; URL: https://github.com/nelnet-team/circuitpython-mode
 
