@@ -1,10 +1,10 @@
-# circuitpython-mode.el
+* circuitpython-mode.el
 
-## This is in early development.
+** This is in early development.
 Only working code will be committed to MELPA Stable, but the current
 functionality is limited
 
-## Description
+** Description
 This package provides a minor mode called =circuitpython-mode=.
 This mode is intended to help with the workflow in circuitpython
 development. It is invoked by typing:
@@ -13,9 +13,9 @@ development. It is invoked by typing:
 M-x circuitpython-mode
 #+END_SRC
 
-## Usage
+** Usage
 
-### Compile (copy file to board)
+*** Compile (copy file to board)
 
 A function, =circuitpython-compile-copy=, is added that is invoked each
 time the buffer is saved (after-save-hook). When invoked, the new
@@ -34,7 +34,7 @@ This does not modify the behavior of =compile= itself, it only changes the
 command that will presented as the default compile command when
 invoking =compile= (usually **[C-c c]** )
 
-### Compile .mpy
+*** Compile .mpy
 
 Additionally, a new command, =circuitpython-mpy-compile=, is added and
 bound to **[C-c m]**.  If the variable =mpy-compiler= is defined (ie as
@@ -56,7 +56,7 @@ After the mpy compile command  is defined, =compile= is called, after which
 after compiling an .mpy, the compile command will revert back to being
 the command to copy the file to the board.
 
-## Example directory local variables
+** Example directory local variables
 =.dir-locals.el=
 
 #+BEGIN_SRC emacs-lisp
