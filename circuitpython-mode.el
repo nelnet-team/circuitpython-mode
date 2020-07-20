@@ -21,7 +21,7 @@
 
 ;;   This package provides a minor mode called `circuitpython-mode'.  This
 ;;   mode is intended to help with the workflow in circuitpython
-;;   development. It is invoked by typing:
+;;   development.  It is invoked by typing:
 
 ;;   ┌────
 ;;   │ M-x circuitpython-mode
@@ -35,7 +35,7 @@
 ;; ╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
 
 ;;   A function, `circuitpython-compile-copy', is added that is invoked
-;;   each time the buffer is saved (after-save-hook). When invoked, the new
+;;   each time the buffer is saved (after-save-hook).  When invoked, the new
 ;;   command will update the compile-command to be a shell command that
 ;;   will copy the current file to a different directory (ie the board).
 ;;   The destination directory needs to be defined as a *file-local* or
@@ -58,7 +58,7 @@
 ;;   bound to **[C-c m]**.  If the variable `mpy-compiler' is defined (ie
 ;;   as file-local or dir-local), then that command will be used.
 ;;   Otherwise the command "mpy-cross" is used.  One potentional reason to
-;;   specify the mpy-compiler is if it is not in $PATH. This will define
+;;   specify the mpy-compiler is if it is not in $PATH.  This will define
 ;;   the compile-command to be something like:
 
 ;;   ┌────
@@ -70,7 +70,7 @@
 ;;   above and provide an alternative command.
 
 ;;   After the mpy compile command is defined, `compile' is called, after
-;;   which `circuitpython-compile-copy' (see above) is called. This means
+;;   which `circuitpython-compile-copy' (see above) is called.  This means
 ;;   that after compiling an .mpy, the compile command will revert back to
 ;;   being the command to copy the file to the board.
 
@@ -84,11 +84,13 @@
 ;;   │ ((nil . ((circuitpython-copy-path . "/mnt/chromeos/removable/CIRCPY/"))))
 ;;   └────
 
+;;; Code:
+
 (setq circuitpython-current-mpy-compiler "mpy-cross")
 
 (defun circuitpython-compile-copy ()
-  "Set up compile-command to copy script to board.
-This should set compile-command to something like:
+  "Set up 'compile-command' to copy script to board.
+This should set 'compile-command' to something like:
 cp somefile.py /mnt/foo/bar/CIRCPY/"
     (set (make-variable-buffer-local 'compile-command)
          (concat
@@ -98,8 +100,9 @@ cp somefile.py /mnt/foo/bar/CIRCPY/"
 	  circuitpython-copy-path)))
 
 (defun circuitpython-set-mpy-compiler (newcommand)
-  "Allow the user to interactively set the mpy compiler.  This will provide
-the existing value of circuitpython-current-mpy-compiler as a suggestion."
+  "Allow the user to interactively set the mpy compiler.
+This will provide the existing value of 'circuitpython-current-mpy-compiler'
+as a suggestion.  NEWCOMMAND is the actual compile command that will be set"
   (interactive (list
 		(read-string
 		 (format "New mpy compile command (%s): "
@@ -119,12 +122,12 @@ Otherwise, return the value 'mpy-cross'"
     (symbol-value 'circuitpython-current-mpy-compiler)))
 
 (defun circuitpython-mpy-compile ()
-  "Alternate compile for circuitpython. Sets compile-command
-to use mpy-cross then calls compile after which it calls
-circuitpython-compile-copy to restore the original form.
-This should set compile-command to be something like:
-mpy-cross filename.py
-It assumed this will be bound to something C-c m"
+  "Alternate compile for circuitpython.
+Sets 'compile-command' to use mpy-cross then calls compile
+after which it calls 'circuitpython-compile-copy' to restore
+the original form.  This should set 'compile-command' to be
+Something like:
+mpy-cross filename.py"
   (interactive)
     (set (make-variable-buffer-local 'compile-command)
          (concat
@@ -154,3 +157,4 @@ It assumed this will be bound to something C-c m"
 
 (provide 'circuitpython-mode)
 
+;;; circuitpython-mode.el ends here
