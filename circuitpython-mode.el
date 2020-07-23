@@ -86,13 +86,14 @@
 
 ;;; Code:
 
-(setq circuitpython-current-mpy-compiler "mpy-cross")
+(defvar circuitpython-current-mpy-compiler "mpy-cross")
+(make-variable-buffer-local 'compile-command)
 
 (defun circuitpython-compile-copy ()
   "Set up 'compile-command' to copy script to board.
 This should set 'compile-command' to something like:
 cp somefile.py /mnt/foo/bar/CIRCPY/"
-    (set (make-variable-buffer-local 'compile-command)
+    (set 'compile-command
          (concat
 	  "cp "
 	  (file-name-nondirectory (buffer-file-name (current-buffer)))
@@ -129,7 +130,7 @@ the original form.  This should set 'compile-command' to be
 Something like:
 mpy-cross filename.py"
   (interactive)
-    (set (make-variable-buffer-local 'compile-command)
+    (set 'compile-command
          (concat
 	  (circuitpython-get-mpy-compiler)
 	  " "
@@ -137,7 +138,6 @@ mpy-cross filename.py"
     (compile compile-command)
     (circuitpython-compile-copy))
 
-;;;###autoload
 (define-minor-mode circuitpython-mode
   "Minor mode for CircuitPython"
   :lighter " circpy"
@@ -150,7 +150,6 @@ mpy-cross filename.py"
 ;; If the variable circuitpython-copy-path is defined
 ;; (usually as a file-local or dir-local variable), then
 ;; add a hook to set the compile command after each save
-;;;###autoload
 (if (boundp 'circuitpython-copy-path)
     (add-hook 'after-save-hook 'circuitpython-compile-copy)
   nil)
