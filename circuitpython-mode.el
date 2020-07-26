@@ -1,9 +1,11 @@
-;;; circuitpython-mode.el --- Minor mode for CircuitPython
+;;; circuitpython-mode.el --- Minor mode for CircuitPython -*- lexical-binding: t; -*-
 
 ;; Author: Lee Nelson <lnelson@nelnet.org>
-;; Version: 0.6
-;; Keywords: circuitpython, adafruit
+;; Package-Requires: ((emacs "24.1"))
+;; Package-Version: 0.6.1
+;; Keywords: languages, tools
 ;; URL: https://github.com/nelnet-team/circuitpython-mode
+;; SPDX-License-Identifier: MIT
 
 ;;; Commentary:
 ;; 1 circuitpython-mode.el
@@ -55,7 +57,7 @@
 ;; ╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
 
 ;;   Additionally, a new command, `circuitpython-mpy-compile', is added and
-;;   bound to **[C-c m]**.  If the variable `mpy-compiler' is defined (ie
+;;   bound to **[C-c !]**.  If the variable `mpy-compiler' is defined (ie
 ;;   as file-local or dir-local), then that command will be used.
 ;;   Otherwise the command "mpy-cross" is used.  One potentional reason to
 ;;   specify the mpy-compiler is if it is not in $PATH.  This will define
@@ -66,7 +68,7 @@
 ;;   └────
 
 ;;   There is also a command, `circuitpython-set-mpy-compiler', bound to
-;;   **[C-c n]** that allows the user to override the process described
+;;   **[C-c @]** that allows the user to override the process described
 ;;   above and provide an alternative command.
 
 ;;   After the mpy compile command is defined, `compile' is called, after
@@ -142,8 +144,8 @@ mpy-cross filename.py"
   "Minor mode for CircuitPython"
   :lighter " circpy"
   :keymap (let ((map (make-sparse-keymap)))
-            (define-key map (kbd "C-c m") 'circuitpython-mpy-compile)
-            (define-key map (kbd "C-c n") 'circuitpython-set-mpy-compiler)
+            (define-key map (kbd "C-c !") 'circuitpython-mpy-compile)
+            (define-key map (kbd "C-c @") 'circuitpython-set-mpy-compiler)
             map))
 
 
@@ -151,7 +153,7 @@ mpy-cross filename.py"
 ;; (usually as a file-local or dir-local variable), then
 ;; add a hook to set the compile command after each save
 (if (boundp 'circuitpython-copy-path)
-    (add-hook 'after-save-hook 'circuitpython-compile-copy)
+    (add-hook 'after-save-hook #'circuitpython-compile-copy)
   nil)
 
 (provide 'circuitpython-mode)

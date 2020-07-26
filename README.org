@@ -37,7 +37,7 @@ invoking =compile= (usually **[C-c c]** )
 *** Compile .mpy
 
 Additionally, a new command, =circuitpython-mpy-compile=, is added and
-bound to **[C-c m]**.  If the variable =mpy-compiler= is defined (ie as
+bound to **[C-c !]**.  If the variable =mpy-compiler= is defined (ie as
 file-local or dir-local), then that command will be used.  Otherwise
 the command "mpy-cross" is used.  One potentional reason to specify
 the mpy-compiler is if it is not in $PATH. This will define the
@@ -48,7 +48,7 @@ mpy-cross filename.py
 #+END_SRC
 
 There is also a command, =circuitpython-set-mpy-compiler=, bound to
-**[C-c n]** that allows the user to override the process described
+**[C-c @]** that allows the user to override the process described
 above and provide an alternative command.
 
 After the mpy compile command  is defined, =compile= is called, after which
