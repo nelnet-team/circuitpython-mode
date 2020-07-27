@@ -2,7 +2,7 @@
 
 ;; Author: Lee Nelson <lnelson@nelnet.org>
 ;; Package-Requires: ((emacs "24.1"))
-;; Package-Version: 0.6.1
+;; Package-Version: 0.6.2
 ;; Keywords: languages, tools
 ;; URL: https://github.com/nelnet-team/circuitpython-mode
 ;; SPDX-License-Identifier: MIT
@@ -90,6 +90,7 @@
 
 (defvar circuitpython-current-mpy-compiler "mpy-cross")
 (make-variable-buffer-local 'compile-command)
+(make-local-variable 'circuitpython-copy-path)
 
 (defun circuitpython-compile-copy ()
   "Set up 'compile-command' to copy script to board.
