@@ -146,7 +146,7 @@ mpy-cross filename.py"
   :lighter " circpy"
   :keymap (let ((map (make-sparse-keymap)))
             (define-key map (kbd "C-c !") 'circuitpython-mpy-compile)
-            (define-key map (kbd "C-c @") 'circuitpython-set-mpy-compiler)
+            (define-key map (kbd "C-c #") 'circuitpython-set-mpy-compiler)
             map))
 
 
