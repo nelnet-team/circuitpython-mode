@@ -59,7 +59,7 @@
 ;;   Additionally, a new command, `circuitpython-mpy-compile', is added and
 ;;   bound to **[C-c !]**.  If the variable `mpy-compiler' is defined (ie
 ;;   as file-local or dir-local), then that command will be used.
-;;   Otherwise the command "mpy-cross" is used.  One potentional reason to
+;;   Otherwise the command "mpy-cross" is used.  One potential reason to
 ;;   specify the mpy-compiler is if it is not in $PATH.  This will define
 ;;   the compile-command to be something like:
 
@@ -103,17 +103,17 @@ cp somefile.py /mnt/foo/bar/CIRCPY/"
 	  " "
 	  circuitpython-copy-path)))
 
-(defun circuitpython-set-mpy-compiler (newcommand)
+(defun circuitpython-set-mpy-compiler (new-command)
   "Allow the user to interactively set the mpy compiler.
 This will provide the existing value of 'circuitpython-current-mpy-compiler'
-as a suggestion.  NEWCOMMAND is the actual compile command that will be set"
+as a suggestion.  NEW-COMMAND is the actual compile command that will be set"
   (interactive (list
 		(read-string
 		 (format "New mpy compile command (%s): "
 			 (symbol-value 'circuitpython-current-mpy-compiler))
 		 nil nil
 		 (symbol-value 'circuitpython-current-mpy-compiler))))
-  (setq circuitpython-current-mpy-compiler newcommand)
+  (setq circuitpython-current-mpy-compiler new-command)
   (message "mpy compile command set to %s" circuitpython-current-mpy-compiler))
 
 (defun circuitpython-get-mpy-compiler ()
